@@ -33,9 +33,13 @@ socket.on('broadcast',function(data)
     $('#player-count').html(data.userCount);
 });
 
-socket.on('getUid', function (data) {
+socket.on('getUidAndCurrentPlayer', function (data) {
     console.log(data);
     uid=data.uid;
+
+    data.players.forEach(function(element){
+        playerMap.set(element,Player.createNew(element));
+    });
     //socket.emit('my other event', { my: 'data' });
 });
 
@@ -59,9 +63,9 @@ socket.on('p2 move', function (data) {
     }
     else
     {
-        console.log("no key"+data.uid+playerMap.size);
+        //console.log("no key"+data.uid+playerMap.size);
     }
-    console.log("no key"+data.uid+playerMap.size);
+    //console.log("no key"+data.uid+playerMap.size);
 
     //socket.emit('my other event', { my: 'data' });
 });
@@ -326,7 +330,7 @@ function gameover(){
             postionToSend.y=evt.layerY;
         });
 
-        fps = setInterval(planes.update, 1000/30);
+        fps = setInterval(planes.update, 1000/10);
     }(cxt)
 );
 
