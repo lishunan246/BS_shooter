@@ -1,35 +1,67 @@
 // JavaScript Document
-var socket = io.connect('http://localhost:8000');
+var socket = io.connect('http://192.168.31.4:8000');
 var uid;
 
 //my position
 var me = {x:240,y:750};
+
+var postionToSend={
+    x:0,
+    y:0
+};
+
+var playerMap=new Map();
+
+var Player={
+    createNew:function(uid)
+    {
+        var player={};
+        player.uid=uid;
+        return player;
+    }
+};
+
 
 socket.on("your move",function(data){
     me.x=data.x;
     me.y=data.y;
 });
 
-socket.on('broadcast',function(data){
-   console.log(data);
+socket.on('broadcast',function(data)
+{
+   //console.log(data);
+    $('#player-count').html(data.userCount);
 });
 
 socket.on('getUid', function (data) {
     console.log(data);
-    uid=data.id;
+    uid=data.uid;
     //socket.emit('my other event', { my: 'data' });
 });
 
 socket.on('add player', function (data) {
+    playerMap.set(data.uid,Player.createNew(data.uid));
+
     console.log(data);
 });
 
 socket.on('remove player', function (data) {
+    playerMap.delete(data.uid);
     console.log(data);
 });
 
 socket.on('p2 move', function (data) {
-    console.log(data);
+   // console.log(data);
+    if(playerMap.has(data.uid))
+    {
+        playerMap.get(data.uid).x=data.x;
+        playerMap.get(data.uid).y=data.y;
+    }
+    else
+    {
+        console.log("no key"+data.uid+playerMap.size);
+    }
+    console.log("no key"+data.uid+playerMap.size);
 
     //socket.emit('my other event', { my: 'data' });
 });
@@ -110,7 +142,7 @@ function gameover(){
 (
 	function(cxt)
     {
-        var planes = {planeCount:0};
+        var planes = {backgroudX:0};
         // 用于存放小飞机
         var planeArray = [];
 
@@ -137,6 +169,16 @@ function gameover(){
             // 子弹
             planes.cartridge();
 
+            $('#sbX').html(me.x);
+            $('#sbY').html(me.y);
+            if(uid==null)
+            {
+                console.log("no uid");
+            }
+            else{
+                socket.emit("move",{x:postionToSend.x,y:postionToSend.y,uid:uid});
+            }
+
 
             cxt.font = "italic 20px 微软雅黑";
             cxt.strokeText("积分：" + playerScore, 10, 30);
@@ -161,33 +203,32 @@ function gameover(){
          * 设置移动的背景
          */
         planes.setBg = function(){
-            planes.planeCount++;
-            if(planes.planeCount == 800){
-                planes.planeCount = 0;
+            planes.backgroudX++;
+            if(planes.backgroudX == 800){
+                planes.backgroudX = 0;
             }
             // 画布的背景
-            cxt.drawImage(img,0,planes.planeCount,480,800);
-            cxt.drawImage(img,0,planes.planeCount - 800,480,800);
+            cxt.drawImage(img,0,planes.backgroudX,480,800);
+            cxt.drawImage(img,0,planes.backgroudX - 800,480,800);
         };
 
-        planes.setFlivver = function(){
-            // 生成飞机
-            if(planes.planeCount % time2 == 0){
-                planeLog++;
-                if(planeLog % 6 == 0){
-                    planeArray.push(getPlaneByType(2));
-                }else if(planeLog % 13 == 0){
-                    planeArray.push(getPlaneByType(3));
-                }else{
-                    planeArray.push(getPlaneByType(1));
-                }
+        planes.setFlivver = function()
+        {
+            //// 生成飞机
+            //if(planes.planeCount % time2 == 0)
+            //{
+            //    planeLog++;
+            //    if(planeLog % 6 == 0){
+            //        planeArray.push(getPlaneByType(2));
+            //    }else if(planeLog % 13 == 0){
+            //        planeArray.push(getPlaneByType(3));
+            //    }else{
+            //        planeArray.push(getPlaneByType(1));
+            //    }
+            //}
 
-            }
-
-            for(var a in planeArray){
-
-
-
+            for(var a in planeArray)
+            {
                 planeArray[a].y += planeArray[a].speed;
                 // 如果超出屏幕将该小飞机删除
                 if(planeArray[a].y > 780){
@@ -195,9 +236,9 @@ function gameover(){
                 }
                 // 将小飞机画到画布上
 
-
                 // 小飞机死亡
-                if(planeArray[a].over > 0){
+                if(planeArray[a].over > 0)
+                {
                     planeArray[a].over --;
 
                     if(planeArray[a].over > 20){
@@ -207,10 +248,9 @@ function gameover(){
                     }else{
                         planeArray.splice(a, 1);
                     }
-
-
-
-                }else{
+                }
+                else
+                {
                     cxt.drawImage(planeArray[a].img,planeArray[a].x,planeArray[a].y,planeArray[a].width,planeArray[a].height);
                     // 判断自己是否死亡
                     if( me.x > (planeArray[a].x - planeArray[a].width + 20) && (me.x) <(planeArray[a].x + planeArray[a].width - 20) && (me.y) < (planeArray[a].y + planeArray[a].height + 20) && (me.y + 72) > (planeArray[a].y - 20)){
@@ -230,11 +270,14 @@ function gameover(){
         // 更新自己的距离
         planes.setMe = function(){
             cxt.drawImage(meImg,me.x-32,me.y-36,64,72);
+            for (var value of playerMap.values()) {
+                cxt.drawImage(meImg,value.x-32,value.y-36,64,72);
+            }
         };
 
         // 更新子弹方法
         planes.cartridge = function(){
-            if(planes.planeCount % 10 == 0){
+            if(planes.backgroudX % 10 == 0){
                 bulletArray.push(new Cartridge(me.x,me.y));
             }
 
@@ -279,18 +322,11 @@ function gameover(){
             //me.x=evt.layerX;
             ////me.x = evt.layerX - $('#canvas').offset().left - 32;
             //me.y = evt.layerY ;
-            $('#sbX').html(me.x);
-            $('#sbY').html(me.y);
-            if(uid==null)
-            {
-                console.log("no uid");
-            }
-            else{
-                socket.emit("move",{x:evt.layerX,y:evt.layerY,uid:uid});
-            }
+            postionToSend.x=evt.layerX;
+            postionToSend.y=evt.layerY;
         });
 
-        fps = setInterval(planes.update, 1000/100);
+        fps = setInterval(planes.update, 1000/30);
     }(cxt)
 );
 
