@@ -8,6 +8,13 @@ socket.on('getUid', function (data) {
     //socket.emit('my other event', { my: 'data' });
 });
 
+socket.on('add player', function (data) {
+    console.log(data);
+});
+
+socket.on('remove player', function (data) {
+    console.log(data);
+});
 
 socket.on('p2 move', function (data) {
     console.log(data);
@@ -79,8 +86,10 @@ function gameover(){
 	//$('#dotu').fadeOut();
 	$('.content').css('position','relative')
         .append('<span style="position:absolute; top:5px; left:2px; font-size:150px; color:#cc0000;  text-align:center" id="sil"></span>');
-	$('#sil').html('你').hide().fadeIn(1000,function(){
-		$(this).html('你屎').hide().fadeIn(1000,function(){
+	$('#sil').html('你').hide().fadeIn(1000,function()
+    {
+		$(this).html('你屎').hide().fadeIn(1000,function()
+        {
 			$(this).html('<a href="javascript:location.reload();" style="color:#cc0000" title="重新开始">你屎了</a><br>' + jifen  + ' 分').hide().fadeIn();
 		});	
 	});
@@ -103,7 +112,8 @@ function gameover(){
         var boo1 = newImg('./assets/boo1.png');
         var over = newImg('./assets/over.png');
         //
-        planes.update = function(){
+        planes.update = function()
+        {
 
             planes.setTimes();
             // 设置背景
@@ -216,7 +226,7 @@ function gameover(){
                 cartridges.push(new Cartridge(me.x + 30,me.y));
             }
 
-            for(i in cartridges){
+            for(var i in cartridges){
                 // 飞到顶部就将OBJ删除掉
                 if(cartridges[i].y < 0){
                     cartridges.splice(i, 1);
@@ -229,7 +239,7 @@ function gameover(){
                 cxt.drawImage(cartridgeImg,cartridges[i].x,cartridges[i].y,7,17);
 
                 // 子弹碰到飞机的情况
-                for(j in flivver){
+                for(var j in flivver){
                     if(flivver[j].over > 0){
                         continue;
                     }
@@ -259,7 +269,13 @@ function gameover(){
             me.y = evt.layerY -  36 ;
             $('#sbX').html(me.x);
             $('#sbY').html(me.y);
-            socket.emit("move",{x:me.x,y:me.y,uid:uid});
+            if(uid==null)
+            {
+                console.log("no uid");
+            }
+            else{
+                socket.emit("move",{x:me.x,y:me.y,uid:uid});
+            }
         });
 
         fps = setInterval(planes.update, 1000/100);
