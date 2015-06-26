@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f372a3e-bebc-410f-975e-4c92c7fb9048" name="Default" comment="sync genPlane">
+    <list default="true" id="4f372a3e-bebc-410f-975e-4c92c7fb9048" name="Default" comment="disconnect on death">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.js" afterPath="$PROJECT_DIR$/game.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.js" afterPath="$PROJECT_DIR$/server/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -30,11 +30,11 @@
           <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/game.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.615894">
-                  <caret line="163" column="24" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="24" />
+                <state vertical-scroll-proportion="0.08498584">
+                  <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
                   <folding>
-                    <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-                    <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
+                    <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+                    <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -57,8 +57,8 @@
           <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/server/server.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.29933774">
-                  <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
+                <state vertical-scroll-proportion="0.35410765">
+                  <caret line="210" column="33" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
@@ -95,8 +95,8 @@
         <option value="$PROJECT_DIR$/dotu_game.js" />
         <option value="$PROJECT_DIR$/socket.io.js" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/server/server.js" />
         <option value="$PROJECT_DIR$/game.js" />
+        <option value="$PROJECT_DIR$/server/server.js" />
       </list>
     </option>
   </component>
@@ -283,7 +283,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435339019232</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="disconnect on death">
+      <created>1435340831872</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1435340831872</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -297,9 +303,9 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32575756" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20454545" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20454545" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15151516" sideWeight="0.49702382" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15151516" sideWeight="0.49702382" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -344,7 +350,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=".." />
     <MESSAGE value="sync genPlane" />
-    <option name="LAST_COMMIT_MESSAGE" value="sync genPlane" />
+    <MESSAGE value="disconnect on death" />
+    <option name="LAST_COMMIT_MESSAGE" value="disconnect on death" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -361,8 +368,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="3" selection-start-line="67" selection-start-column="3" selection-end-line="67" selection-end-column="3" />
           <folding>
-            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -396,8 +403,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="287" column="38" selection-start-line="287" selection-start-column="38" selection-end-line="287" selection-end-column="38" />
           <folding>
-            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -423,8 +430,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="276" column="60" selection-start-line="276" selection-start-column="60" selection-end-line="276" selection-end-column="60" />
           <folding>
-            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -450,8 +457,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
           <folding>
-            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -477,8 +484,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
           <folding>
-            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -539,22 +546,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/server.js">
+    <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29933774">
-          <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
-          <folding />
+        <state vertical-scroll-proportion="0.08498584">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding>
+            <marker date="1435341288549" expanded="true" signature="3423:3511" placeholder="..." />
+            <marker date="1435341288549" expanded="true" signature="3715:3728" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.js">
+    <entry file="file://$PROJECT_DIR$/server/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.615894">
-          <caret line="163" column="24" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="24" />
-          <folding>
-            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
-            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.35410765">
+          <caret line="210" column="33" selection-start-line="210" selection-start-column="33" selection-end-line="210" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>

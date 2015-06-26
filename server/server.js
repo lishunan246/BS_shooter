@@ -205,7 +205,11 @@ io.on('connection', function (socket) {
 
     var players=[];
     for (var key of playerMap.keys()) {
-        players.push(key);
+        players.push({
+            uid: key,
+            x: playerMap.get(key).x,
+            y: playerMap.get(key).y
+        });
     }
 
     //on connect you get your uid and others' uid

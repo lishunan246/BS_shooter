@@ -52,7 +52,9 @@ socket.on('initialize', function (data) {
     interval = data.interval;
 
     data.players.forEach(function(element){
-        playerMap.set(element,Player.createNew(element));
+        playerMap.set(element.uid, Player.createNew(element.uid));
+        playerMap.get(element.uid).x = element.x;
+        playerMap.get(element.uid).y = element.y;
     });
     //socket.emit('my other event', { my: 'data' });
 });
