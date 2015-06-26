@@ -1,8 +1,11 @@
 var io = require('socket.io')(8000);
 
+var interval = 10;
 var uid=0;
 var userCount=0;
 
+
+//uid scoreMap
 var playerMap=new Map();
 var bulletArray=[];
 
@@ -35,24 +38,26 @@ function generateBullet()
         })
     }
 }
-
+var counter = 0;
 function update()
 {
-    generateBullet();
+
+    if (counter++ % 5 == 0)
+        generateBullet();
     io.sockets.emit('broadcast',
         {
             userCount:playerMap.size
         });
 }
 
-setInterval(update,1000);
+setInterval(update, 1000 / interval);
 
 
 
 io.on('connection', function (socket) {
     uid++;
     userCount++;
-    playerMap.set(uid,true);
+    playerMap.set(uid, 0);
 
     socket.uid=uid;
 
@@ -61,11 +66,17 @@ io.on('connection', function (socket) {
         players.push(key);
     }
 
-    socket.emit('getUidAndCurrentPlayer', { uid: socket.uid ,players:players});
+    //on connect you get your uid and others' uid
+    socket.emit('initialize', {
+        uid: socket.uid,
+        players: players,
+        interval: interval
+    });
+
 
     //向其他玩家广播
     socket.broadcast.emit("add player",{uid:socket.uid});
-    console.log(socket.uid+" connected");
+    console.log(socket.uid + " connected" + interval);
 
 
     //退出

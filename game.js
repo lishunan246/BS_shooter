@@ -1,6 +1,7 @@
 // JavaScript Document
-var socket = io.connect('http://192.168.31.4:8000');
+var socket = io.connect('http://192.168.40.1:8000');
 var uid;
+var interval = 10;
 
 //my position
 var me = {x:240,y:750};
@@ -42,9 +43,12 @@ socket.on('broadcast',function(data)
     $('#player-count').html(data.userCount);
 });
 
-socket.on('getUidAndCurrentPlayer', function (data) {
-    console.log(data);
+
+//on connect you get your uid and others' uid
+socket.on('initialize', function (data) {
+    console.log('connect:' + data);
     uid=data.uid;
+    interval = data.interval;
 
     data.players.forEach(function(element){
         playerMap.set(element,Player.createNew(element));
@@ -72,7 +76,7 @@ socket.on('p2 move', function (data) {
     }
     else
     {
-        //console.log("no key"+data.uid+playerMap.size);
+        console.log("no key" + data.uid + playerMap.size);
     }
     //console.log("no key"+data.uid+playerMap.size);
 
@@ -296,7 +300,7 @@ function gameover(){
         };
 
         // 更新子弹方法
-        planes.cartridge = function(){
+        planes.cartridge = function () {
             //if(planes.counter % 10 == 0){
             //    bulletArray.push(new Bullet(me.x,me.y));
             //}
@@ -351,7 +355,7 @@ function gameover(){
             positionToSend.y=evt.layerY;
         });
 
-        fps = setInterval(planes.update, 1000/10);
+        fps = setInterval(planes.update, 1000 / interval);
     }(cxt)
 );
 
