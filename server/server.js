@@ -82,7 +82,7 @@ function generatePlane() {
 
     planeArray.push(plane);
 
-    console.log(plane);
+    //console.log(plane);
 
     io.sockets.emit("generate plane", {
         type: plane.type,
@@ -93,6 +93,87 @@ function generatePlane() {
     })
 }
 
+function updatePlane() {
+    for (var a in planeArray) {
+        if (!planeArray.hasOwnProperty(a)) {
+            continue;
+        }
+        planeArray[a].y += planeArray[a].speed;
+        // 如果超出屏幕将该小飞机删除
+        if (planeArray[a].y > 780) {
+            planeArray.splice(a, 1);
+        }
+
+        // 小飞机死亡
+        if (planeArray[a].over > 0) {
+            planeArray[a].over--;
+
+            if (planeArray[a].over > 20) {
+                //cxt.drawImage(boo1,planeArray[a].x + planeArray[a].width/2 - 20  ,planeArray[a].y + planeArray[a].height / 2 -10,41,39);
+            } else if (planeArray[a].over > 2) {
+                // cxt.drawImage(over,planeArray[a].x + planeArray[a].width/2 - 20 ,planeArray[a].y + planeArray[a].height / 2 -10,40,43);
+            } else {
+                planeArray.splice(a, 1);
+            }
+        }
+        else {
+            //cxt.drawImage(planeArray[a].img,planeArray[a].x,planeArray[a].y,planeArray[a].width,planeArray[a].height);
+            // 判断自己是否死亡
+            //if( me.x > (planeArray[a].x - planeArray[a].width + 20) && (me.x) <(planeArray[a].x + planeArray[a].width - 20) && (me.y) < (planeArray[a].y + planeArray[a].height + 20) && (me.y + 72) > (planeArray[a].y - 20)){
+            //     gameover();
+            // }
+
+            if (planeArray[a].hit > 0) {
+                //    cxt.drawImage(boo1,planeArray[a].x + planeArray[a].width/2 - 20 ,planeArray[a].y + planeArray[a].height / 2 -10,41,39);
+                //cxt.drawImage(boo1,flivver[a].x + 5 ,flivver[a].y,41,39);
+                planeArray[a].hit--;
+            }
+        }
+    }
+}
+
+function updateBullet() {
+    for (var i in bulletArray) {
+        if (!bulletArray.hasOwnProperty(i)) {
+            continue;
+        }
+        // 飞到顶部就将OBJ删除掉
+        if (bulletArray[i].y < 0) {
+            bulletArray.splice(i, 1);
+            continue;
+        }
+
+        bulletArray[i].y -= bulletArray[i].speed;
+        // 将小飞机画到画布上
+        //cxt.drawImage(bulletImg,bulletArray[i].x,bulletArray[i].y,7,17);
+
+        // 子弹碰到飞机的情况
+        for (var j in planeArray) {
+            if (!planeArray.hasOwnProperty(j)) {
+                continue;
+            }
+            if (planeArray[j].over > 0) {
+                continue;
+            }
+            if (bulletArray[i].x > planeArray[j].x && bulletArray[i].x < planeArray[j].x + planeArray[j].width && bulletArray[i].y > planeArray[j].y && bulletArray[i].y - planeArray[j].height < planeArray[j].y) {
+
+                planeArray[j].hit = 10;
+                //$('#isdz').html('打中了编号' + j);
+
+                if (planeArray[j].hp > 1) {
+                    planeArray[j].hp -= 80;
+                } else {
+                    planeArray[j].over = 40;
+                    ///playerScore += 1;
+                }
+                // 子弹消失
+                bulletArray.splice(i, 1);
+                break;
+            }
+        }
+    }
+}
+
 var counter = 0;
 function update()
 {
@@ -101,6 +182,9 @@ function update()
         generateBullet();
     if (counter % 20 == 0)
         generatePlane();
+
+    updatePlane();
+    updateBullet();
 
     io.sockets.emit('broadcast',
         {

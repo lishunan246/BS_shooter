@@ -1,5 +1,5 @@
 // JavaScript Document
-var socket = io.connect('http://192.168.40.1:8000');
+var socket = io.connect('http://192.168.31.4:8000');
 var uid;
 var interval = 10;
 
@@ -161,6 +161,7 @@ function Plane(hp, width, height, img, speed){
 
 function gameover(){
 	window.clearTimeout(fps);
+    socket.disconnect();
 	//$('#dotu').fadeOut();
 	$('.content').css('position','relative')
         .append('<span style="position:absolute; top:5px; left:2px; font-size:150px; color:#cc0000;  text-align:center" id="sil"></span>');
@@ -169,7 +170,7 @@ function gameover(){
 		$(this).html('你屎').hide().fadeIn(1000,function()
         {
 			$(this).html('<a href="javascript:location.reload();" style="color:#cc0000" title="重新开始">你屎了</a><br>' + playerScore  + ' 分').hide().fadeIn();
-		});	
+        });
 	});
 }
 

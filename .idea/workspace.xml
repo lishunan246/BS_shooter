@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4f372a3e-bebc-410f-975e-4c92c7fb9048" name="Default" comment="..">
+    <list default="true" id="4f372a3e-bebc-410f-975e-4c92c7fb9048" name="Default" comment="sync genPlane">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game.js" afterPath="$PROJECT_DIR$/game.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.js" afterPath="$PROJECT_DIR$/server/server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -30,11 +30,11 @@
           <file leaf-file-name="game.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/game.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.66887414">
-                  <caret line="302" column="17" selection-start-line="302" selection-start-column="17" selection-end-line="302" selection-end-column="17" />
+                <state vertical-scroll-proportion="0.615894">
+                  <caret line="163" column="24" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="24" />
                   <folding>
-                    <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-                    <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+                    <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+                    <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -57,8 +57,8 @@
           <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/server/server.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.7086093">
-                  <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+                <state vertical-scroll-proportion="0.29933774">
+                  <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
                   <folding />
                 </state>
               </provider>
@@ -277,7 +277,13 @@
       <option name="project" value="LOCAL" />
       <updated>1435335141200</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sync genPlane">
+      <created>1435339019231</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1435339019232</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -337,7 +343,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value=".." />
-    <option name="LAST_COMMIT_MESSAGE" value=".." />
+    <MESSAGE value="sync genPlane" />
+    <option name="LAST_COMMIT_MESSAGE" value="sync genPlane" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -354,8 +361,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="3" selection-start-line="67" selection-start-column="3" selection-end-line="67" selection-end-column="3" />
           <folding>
-            <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-            <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -389,8 +396,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="287" column="38" selection-start-line="287" selection-start-column="38" selection-end-line="287" selection-end-column="38" />
           <folding>
-            <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-            <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -416,8 +423,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="276" column="60" selection-start-line="276" selection-start-column="60" selection-end-line="276" selection-end-column="60" />
           <folding>
-            <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-            <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -443,8 +450,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="12" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="12" />
           <folding>
-            <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-            <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -470,8 +477,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="46" selection-start-line="1" selection-start-column="46" selection-end-line="1" selection-end-column="46" />
           <folding>
-            <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-            <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -534,19 +541,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7086093">
-          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.29933774">
+          <caret line="84" column="6" selection-start-line="84" selection-start-column="6" selection-end-line="84" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.66887414">
-          <caret line="302" column="17" selection-start-line="302" selection-start-column="17" selection-end-line="302" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.615894">
+          <caret line="163" column="24" selection-start-line="163" selection-start-column="24" selection-end-line="163" selection-end-column="24" />
           <folding>
-            <marker date="1435338985197" expanded="true" signature="3278:3366" placeholder="..." />
-            <marker date="1435338985197" expanded="true" signature="3570:3583" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3319:3407" placeholder="..." />
+            <marker date="1435340768592" expanded="true" signature="3611:3624" placeholder="..." />
           </folding>
         </state>
       </provider>
