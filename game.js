@@ -5,7 +5,7 @@ var uid;
 //my position
 var me = {x:240,y:750};
 
-var postionToSend={
+var positionToSend={
     x:0,
     y:0
 };
@@ -20,6 +20,15 @@ var Player={
         return player;
     }
 };
+
+var bulletArray = [];
+
+function Bullet(uid,x,y,speed){
+    this.uid=uid;
+    this.x = x;
+    this.y = y;
+    this.speed=speed;
+}
 
 
 socket.on("your move",function(data){
@@ -68,6 +77,12 @@ socket.on('p2 move', function (data) {
     //console.log("no key"+data.uid+playerMap.size);
 
     //socket.emit('my other event', { my: 'data' });
+});
+
+socket.on('generate bullet',function(data)
+{
+    console.log(data);
+    bulletArray.push(new Bullet(data.uid,data.x,data.y,data.speed));
 });
 
 var c = document.getElementById("canvas");
@@ -124,10 +139,7 @@ function getPlaneByType(type){
 			return new Plane(1000, 110, 170, planeImg3, getSpeed());
 	}
 }
-function Cartridge(x,y){
-	this.x = x;
-	this.y = y;	
-}
+
 
 function gameover(){
 	window.clearTimeout(fps);
@@ -146,7 +158,7 @@ function gameover(){
 (
 	function(cxt)
     {
-        var planes = {backgroudX:0};
+        var planes = {counter:0};
         // 用于存放小飞机
         var planeArray = [];
 
@@ -154,7 +166,7 @@ function gameover(){
 
         var meImg = newImg('assets/me.png');//64*72
         // 子弹
-        var bulletArray = [];
+
         var bulletImg = newImg('./assets/cartridge.png');
 
         var boo1 = newImg('./assets/boo1.png');
@@ -163,7 +175,7 @@ function gameover(){
         planes.update = function()
         {
 
-            planes.setTimes();
+            //planes.setTimes();
             // 设置背景
             planes.setBg();
             // 设置小飞机
@@ -179,41 +191,41 @@ function gameover(){
             {
                 console.log("no uid");
             }
-            else{
-                socket.emit("move",{x:postionToSend.x,y:postionToSend.y,uid:uid});
+            else if(!(positionToSend.x==me.x&&positionToSend.y==me.y)){
+                socket.emit("move",{x:positionToSend.x,y:positionToSend.y,uid:uid});
             }
 
 
-            cxt.font = "italic 20px 微软雅黑";
-            cxt.strokeText("积分：" + playerScore, 10, 30);
+            cxt.font = "20px Consolas";
+            cxt.strokeText("Score：" + playerScore, 10, 30);
 
             $('#fjs').html(planeArray.length);
             $('#zds').html(bulletArray.length);
-            $('#scfj').html("1000/" + time2 + " 毫秒");
+           // $('#scfj').html("1000/" + time2 + " 毫秒");
         };
 
-        planes.setTimes = function(){
-            time1++ ;
-            // 100 秒 1个档位
-            if(time1 == 1000){
-                time1 = 0;
-                time2 = (time2 == 20) ? 20 : time2 - 20;
-            }
-
-        };
+        //planes.setTimes = function(){
+        //    time1++ ;
+        //    // 100 秒 1个档位
+        //    if(time1 == 1000){
+        //        time1 = 0;
+        //        time2 = (time2 == 20) ? 20 : time2 - 20;
+        //    }
+        //
+        //};
 
 
         /**
          * 设置移动的背景
          */
         planes.setBg = function(){
-            planes.backgroudX++;
-            if(planes.backgroudX == 800){
-                planes.backgroudX = 0;
+            planes.counter++;
+            if(planes.counter == 800){
+                planes.counter = 0;
             }
             // 画布的背景
-            cxt.drawImage(img,0,planes.backgroudX,480,800);
-            cxt.drawImage(img,0,planes.backgroudX - 800,480,800);
+            cxt.drawImage(img,0,planes.counter,480,800);
+            cxt.drawImage(img,0,planes.counter - 800,480,800);
         };
 
         planes.setFlivver = function()
@@ -233,6 +245,10 @@ function gameover(){
 
             for(var a in planeArray)
             {
+                if(!planeArray.hasOwnProperty(a))
+                {
+                    continue;
+                }
                 planeArray[a].y += planeArray[a].speed;
                 // 如果超出屏幕将该小飞机删除
                 if(planeArray[a].y > 780){
@@ -281,11 +297,15 @@ function gameover(){
 
         // 更新子弹方法
         planes.cartridge = function(){
-            if(planes.backgroudX % 10 == 0){
-                bulletArray.push(new Cartridge(me.x,me.y));
-            }
+            //if(planes.counter % 10 == 0){
+            //    bulletArray.push(new Bullet(me.x,me.y));
+            //}
 
             for(var i in bulletArray){
+                if(!bulletArray.hasOwnProperty(i))
+                {
+                    continue;
+                }
                 // 飞到顶部就将OBJ删除掉
                 if(bulletArray[i].y < 0){
                     bulletArray.splice(i, 1);
@@ -293,12 +313,16 @@ function gameover(){
                 }
 
 
-                bulletArray[i].y -= 20;
+                bulletArray[i].y -= bulletArray[i].speed;
                 // 将小飞机画到画布上
                 cxt.drawImage(bulletImg,bulletArray[i].x,bulletArray[i].y,7,17);
 
                 // 子弹碰到飞机的情况
                 for(var j in planeArray){
+                    if(!planeArray.hasOwnProperty(j))
+                    {
+                        continue;
+                    }
                     if(planeArray[j].over > 0){
                         continue;
                     }
@@ -323,11 +347,8 @@ function gameover(){
 
         // 绑定鼠标事件
         c.addEventListener('mousemove', function onMouseMove(evt) {
-            //me.x=evt.layerX;
-            ////me.x = evt.layerX - $('#canvas').offset().left - 32;
-            //me.y = evt.layerY ;
-            postionToSend.x=evt.layerX;
-            postionToSend.y=evt.layerY;
+            positionToSend.x=evt.layerX;
+            positionToSend.y=evt.layerY;
         });
 
         fps = setInterval(planes.update, 1000/10);
@@ -340,5 +361,3 @@ function newImg(src){
 	obj.src = src;
 	return obj;
 }
-
-//setInterval(h.update, 1000/65);
