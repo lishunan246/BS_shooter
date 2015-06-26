@@ -23,6 +23,7 @@ var Player={
 };
 
 var bulletArray = [];
+var planeArray = [];
 
 function Bullet(uid,x,y,speed){
     this.uid=uid;
@@ -89,6 +90,30 @@ socket.on('generate bullet',function(data)
     bulletArray.push(new Bullet(data.uid,data.x,data.y,data.speed));
 });
 
+// 获取飞机
+function getPlaneByType(type) {
+    switch (type) {
+        case 1:
+            return new Plane(100, 50, 30, planeImg1, getSpeed());
+        case 2:
+            return new Plane(500, 70, 90, planeImg2, getSpeed());
+        case 3:
+            return new Plane(1000, 110, 170, planeImg3, getSpeed());
+    }
+}
+
+
+socket.on("generate plane", function (data) {
+    console.log(data);
+    var plane = getPlaneByType(data.type);
+    plane.x = data.x;
+    plane.y = data.y;
+    plane.speed = data.speed;
+    plane.hp = data.hp;
+    planeArray.push(plane);
+});
+
+
 var c = document.getElementById("canvas");
 var cxt = c.getContext("2d");
 var img = newImg("./assets/bg_01.jpg");
@@ -132,17 +157,6 @@ function Plane(hp, width, height, img, speed){
 	this.speed = speed;
 }
 
-// 获取飞机
-function getPlaneByType(type){
-	switch(type){
-		case 1:
-			return new Plane(100, 50, 30, planeImg1, getSpeed());
-		case 2:
-			return new Plane(500, 70, 90, planeImg2, getSpeed());
-		case 3:
-			return new Plane(1000, 110, 170, planeImg3, getSpeed());
-	}
-}
 
 
 function gameover(){
@@ -164,7 +178,7 @@ function gameover(){
     {
         var planes = {counter:0};
         // 用于存放小飞机
-        var planeArray = [];
+
 
         // 自己
 
@@ -287,7 +301,6 @@ function gameover(){
                         planeArray[a].hit--;
                     }
                 }
-
             }
         };
 

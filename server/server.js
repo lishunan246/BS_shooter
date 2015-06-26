@@ -9,9 +9,7 @@ var userCount=0;
 var playerMap=new Map();
 var bulletArray=[];
 
-var planes={
-    counter:0
-};
+var planeArray = [];
 
 function Bullet(uid,x,y,speed){
     this.uid=uid;
@@ -20,10 +18,23 @@ function Bullet(uid,x,y,speed){
     this.speed=speed;
 }
 
-planes.update=function()
-{
+function Plane(hp, width, height, type, speed) {
+    // 随机的X
+    this.x = parseInt(Math.random() * 460 + 1);
+    this.y = 0;
+    // 血量
+    this.hp = hp;
+    // 挨打
+    this.hit = 0;
+    // 是否死亡
+    this.over = 0;
+    this.type = type;
 
-};
+    this.width = width;
+    this.height = height;
+    this.speed = speed;
+}
+
 
 function generateBullet()
 {
@@ -38,12 +49,59 @@ function generateBullet()
         })
     }
 }
+function getSpeed() {
+    var number = parseInt(Math.random() * 10);
+    if (number < 5 && number > 0) {
+        return number;
+    }
+    return 1;
+}
+
+function getPlaneByType(type) {
+    switch (type) {
+        case 1:
+            return new Plane(100, 50, 30, 1, getSpeed());
+        case 2:
+            return new Plane(500, 70, 90, 2, getSpeed());
+        case 3:
+            return new Plane(1000, 110, 170, 3, getSpeed());
+    }
+}
+
+var planeLog = 0;
+function generatePlane() {
+    planeLog++;
+    var plane;
+    if (planeLog % 6 == 0) {
+        plane = getPlaneByType(2);
+    } else if (planeLog % 13 == 0) {
+        plane = getPlaneByType(3);
+    } else {
+        plane = getPlaneByType(1);
+    }
+
+    planeArray.push(plane);
+
+    console.log(plane);
+
+    io.sockets.emit("generate plane", {
+        type: plane.type,
+        x: plane.x,
+        y: plane.y,
+        speed: plane.speed,
+        hp: plane.hp
+    })
+}
+
 var counter = 0;
 function update()
 {
-
-    if (counter++ % 5 == 0)
+    counter++;
+    if (counter % 3 == 0)
         generateBullet();
+    if (counter % 20 == 0)
+        generatePlane();
+
     io.sockets.emit('broadcast',
         {
             userCount:playerMap.size
