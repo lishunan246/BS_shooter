@@ -1,5 +1,5 @@
 // JavaScript Document
-var socket = io.connect('http://192.168.31.4:8000');
+var socket = io.connect('http://127.0.0.1:8000');
 var uid;
 var interval = 10;
 var playerName=(Cookies.get('playername')==null)?"无名":Cookies.get('playername');
