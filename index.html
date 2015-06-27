@@ -34,6 +34,7 @@
 </div>
 
 <div class="info">
+    <p>当前玩家名: <span id="playername">?</span></p>
     <p>当前玩家数: <span id="player-count">?</span></p>
     <p>鼠标X：<span id="sbX"></span></p>
     <p> 鼠标Y：<span id="sbY"></span></p>
@@ -42,11 +43,13 @@
 </div>
 
 <div class="score">
+    <p><a onclick="register()">注册</a></p>
     <p>其他玩家得分</p>
     <p id="id"><span></span>:<span></span>分</p>
 </div>
 
 <script src="socket.io.js"></script>
+<script src="js.cookie.js"></script>
 <script type="text/javascript" src="game.js"></script>
 </body>
 </html>

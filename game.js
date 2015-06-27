@@ -2,6 +2,19 @@
 var socket = io.connect('http://192.168.31.4:8000');
 var uid;
 var interval = 10;
+var playerName=(Cookies.get('playername')==null)?"无名":Cookies.get('playername');
+$("#playername").html(playerName);
+
+function register()
+{
+    var name=prompt("取一个名字吧","无名");
+    if(name!=null)
+    {
+        playerName=name;
+        $("#playername").html(playerName);
+        Cookies.set('playername', playerName);
+    }
+}
 
 //my position
 var me = {x:240,y:750};
