@@ -7,7 +7,7 @@ $("#playername").html(playerName);
 
 function register()
 {
-    var name=prompt("取一个名字吧","无名");
+    var name=prompt("取一个名字吧",playerName);
     if(name!=null)
     {
         playerName=name;
@@ -15,6 +15,12 @@ function register()
         Cookies.set('playername', playerName);
     }
 }
+
+function highscore()
+{
+    socket.emit("want highscore");
+}
+
 
 //my position
 var me = {x:240,y:750};
@@ -37,6 +43,17 @@ var Player={
 
 var bulletArray = [];
 var planeArray = [];
+var scores;
+function sortResults(prop, asc) {
+    scores = scores.sort(function(a, b) {
+        if (asc) return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        else return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+    });
+
+    var transform = {'tag':'li','html':'${playername} (${playerScore})'};
+
+    $("#s").html(json2html.transform(scores.slice(0,5),transform));
+}
 
 function Bullet(uid,x,y,speed){
     this.uid=uid;
@@ -45,6 +62,12 @@ function Bullet(uid,x,y,speed){
     this.speed=speed;
 }
 
+socket.on("give highscore",function(data){
+    console.log(data);
+    scores=data;
+
+    sortResults('playerScore',false);
+});
 
 socket.on("your move",function(data){
     me.x=data.x;
@@ -101,7 +124,7 @@ socket.on('p2 move', function (data) {
 
 socket.on('generate bullet',function(data)
 {
-    console.log(data);
+    //console.log(data);
     bulletArray.push(new Bullet(data.uid,data.x,data.y,data.speed));
 });
 
@@ -176,6 +199,11 @@ function Plane(hp, width, height, img, speed){
 
 function gameover(){
 	window.clearTimeout(fps);
+    socket.emit("gameover",{
+        uid:uid,
+        playername:playerName,
+        playerScore:playerScore
+    });
     socket.disconnect();
 	//$('#dotu').fadeOut();
 	$('.content').css('position','relative')
@@ -201,8 +229,13 @@ function gameover(){
         var boo1 = newImg('./assets/boo1.png');
         var over = newImg('./assets/over.png');
         //
+
+        var cnt=0;
         planes.update = function()
         {
+            if(cnt++%50==0)
+            socket.emit("want highscore");
+
             planes.setBg();
             // 设置小飞机
             planes.setFlivver();

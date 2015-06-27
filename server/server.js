@@ -256,4 +256,33 @@ io.on('connection', function (socket) {
         socket.emit("your move",data);
         socket.broadcast.emit("p2 move",data);
     });
+
+    socket.on("gameover",function(data)
+    {
+        console.log(data);
+        var collection = database.collection('documents');
+        // Insert some documents
+        collection.insert([
+            data
+        ], function(err, result) {
+            assert.equal(err, null);
+            assert.equal(1, result.result.n);
+            assert.equal(1, result.ops.length);
+            //console.log(result);
+        });
+    });
+
+    socket.on("want highscore",function()
+    {
+        var collection = database.collection('documents');
+        // Find some documents
+        collection.find({}).toArray(function(err, docs) {
+            assert.equal(err, null);
+            console.log("Found the following records");
+            console.dir(docs);
+            console.log("high score");
+            socket.emit("give highscore",docs);
+        });
+
+    })
 });

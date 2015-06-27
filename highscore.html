@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>高分榜</title>
+    <script type="text/javascript" src="./jquery.min.1.7.1.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<div id="s"></div>
+
+
+<script src="socket.io.js"></script>
+<script src="js.cookie.js"></script>
+<script src="json2html.js"></script>
+<script>
+
+
+    var socket = io.connect('http://192.168.31.4:8000');
+    socket.emit("want highscore");
+    socket.on("give highscore",function(data){
+
+        console.log(data);
+        scores=data;
+
+        sortResults('playerScore',false);
+
+
+    });
+</script>
+</body>
+</html>
