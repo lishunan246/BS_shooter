@@ -1,0 +1,29 @@
+{
+  "name": "shooter",
+  "version": "1.0.0",
+  "description": "a shooter game",
+  "main": "game.js",
+  "dependencies": {
+    "mongodb": "^2.0.35",
+    "socket.io": "^1.3.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lishunan246/BS_shooter.git"
+  },
+  "keywords": [
+    "game",
+    "javascript",
+    "websocket"
+  ],
+  "author": "lishunan246",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lishunan246/BS_shooter/issues"
+  },
+  "homepage": "https://github.com/lishunan246/BS_shooter#readme"
+}

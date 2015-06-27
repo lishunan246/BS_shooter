@@ -7,7 +7,23 @@
     <style>
         body{padding:0; margin:0; text-align:center}
         .content{border:1px #000 solid; width:480px; margin:0 auto; height:600px; display:block; font-size:72px;}
-        .info{border:1px #000 solid; position:fixed; top:5px; right:5px; width:150px; text-align:left}
+        .info{
+            border:1px #000 solid;
+            position:fixed;
+            top:5px;
+            right:5px;
+            width:150px;
+            text-align:center;
+        }
+
+        .score{
+            border:1px #000 solid;
+            position:fixed;
+            top:5px;
+            left:5px;
+            width:150px;
+            text-align:center;
+        }
 
         .blog a{ color: #FFF; text-decoration:none; font-size:15px; }
     </style>
@@ -23,9 +39,11 @@
     <p> 鼠标Y：<span id="sbY"></span></p>
     <p> 小飞机数:<span id="fjs"></span></p>
     <p> 子弹数:<span id="zds"></span></p>
-    <p>打中:<span id="isdz"></span></p>
-    <p> 生成飞机时间:<span id="scfj"></span></p>
+</div>
 
+<div class="score">
+    <p>其他玩家得分</p>
+    <p id="id"><span></span>:<span></span>分</p>
 </div>
 
 <script src="socket.io.js"></script>

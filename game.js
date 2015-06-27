@@ -167,11 +167,11 @@ function gameover(){
 	//$('#dotu').fadeOut();
 	$('.content').css('position','relative')
         .append('<span style="position:absolute; top:5px; left:2px; font-size:150px; color:#cc0000;  text-align:center" id="sil"></span>');
-	$('#sil').html('你').hide().fadeIn(1000,function()
+	$('#sil').html('Game').hide().fadeIn(1000,function()
     {
-		$(this).html('你屎').hide().fadeIn(1000,function()
+		$(this).html('Over').hide().fadeIn(1000,function()
         {
-			$(this).html('<a href="javascript:location.reload();" style="color:#cc0000" title="重新开始">你屎了</a><br>' + playerScore  + ' 分').hide().fadeIn();
+			$(this).html('<a href="javascript:location.reload();" style="color:#cc0000" title="重新开始">Game Over</a><br>' + playerScore  + ' 分').hide().fadeIn();
         });
 	});
 }
@@ -181,23 +181,15 @@ function gameover(){
     {
         var planes = {counter:0};
         // 用于存放小飞机
-
-
         // 自己
-
         var meImg = newImg('assets/me.png');//64*72
         // 子弹
-
         var bulletImg = newImg('./assets/cartridge.png');
-
         var boo1 = newImg('./assets/boo1.png');
         var over = newImg('./assets/over.png');
         //
         planes.update = function()
         {
-
-            //planes.setTimes();
-            // 设置背景
             planes.setBg();
             // 设置小飞机
             planes.setFlivver();
@@ -225,17 +217,6 @@ function gameover(){
            // $('#scfj').html("1000/" + time2 + " 毫秒");
         };
 
-        //planes.setTimes = function(){
-        //    time1++ ;
-        //    // 100 秒 1个档位
-        //    if(time1 == 1000){
-        //        time1 = 0;
-        //        time2 = (time2 == 20) ? 20 : time2 - 20;
-        //    }
-        //
-        //};
-
-
         /**
          * 设置移动的背景
          */
@@ -251,19 +232,6 @@ function gameover(){
 
         planes.setFlivver = function()
         {
-            //// 生成飞机
-            //if(planes.planeCount % time2 == 0)
-            //{
-            //    planeLog++;
-            //    if(planeLog % 6 == 0){
-            //        planeArray.push(getPlaneByType(2));
-            //    }else if(planeLog % 13 == 0){
-            //        planeArray.push(getPlaneByType(3));
-            //    }else{
-            //        planeArray.push(getPlaneByType(1));
-            //    }
-            //}
-
             for(var a in planeArray)
             {
                 if(!planeArray.hasOwnProperty(a))
@@ -317,10 +285,6 @@ function gameover(){
 
         // 更新子弹方法
         planes.cartridge = function () {
-            //if(planes.counter % 10 == 0){
-            //    bulletArray.push(new Bullet(me.x,me.y));
-            //}
-
             for(var i in bulletArray){
                 if(!bulletArray.hasOwnProperty(i))
                 {
